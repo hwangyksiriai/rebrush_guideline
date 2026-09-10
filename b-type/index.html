@@ -116,6 +116,15 @@
        (innerHTML 을 통째로 갈아끼우면 제목까지 같이 지워진다) */
     .hero-img.no-img { aspect-ratio: auto; }
     .hero-img.no-img .hero-overlay { position: static; background: none; padding: 28px 24px; }
+    /* 사진이 붙으면 16:14 고정비를 풀고, 히어로 문구가 박스 높이를 정하게 한다.
+       그러면 박스가 사진(3:2)에 가까운 가로 비율이 되어 양옆 잘림이 거의 없어진다.
+       사진은 절대배치로 뒤에 깔고, 문구가 흐름 위에 올라간다. */
+    /* 사진이 붙으면 16:14 고정비와 오버레이를 푼다.
+       히어로 문구가 4~5줄이라 사진 위에 얹으면 병 라벨과 겹쳐 읽기 나빠진다.
+       사진은 원본 비율 그대로 위에, 문구는 그 아래에 둔다. */
+    .hero-img.has-img { aspect-ratio: auto; display: block; }
+    .hero-img.has-img img { position: static; width: 100%; height: auto; }
+    .hero-img.has-img .hero-overlay { position: static; background: none; padding: 24px 24px 28px; }
     .hero-overlay {
       position: absolute; top: 0; left: 0; right: 0;
       padding: 28px 24px 56px;
@@ -127,8 +136,8 @@
     .hero-overlay .hero-desc { margin-bottom: 0; }
 
     .product-thumb {
-      /* 가로로 긴 3종 컷이 들어와도 제대로 보이도록 폭을 열어둔다 */
-      width: 100%; margin: 0 auto 28px;
+      /* 가로로 긴 컷도 감당하도록 폭을 열어두되, 데스크톱에서 과하게 커지지 않게 제한 */
+      width: 100%; max-width: 420px; margin: 0 auto 28px;
       border-radius: 16px; overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: 0 1px 6px rgba(0,0,0,.05);
@@ -453,7 +462,7 @@
 <header>
   <div class="hero">
     <div class="hero-img">
-      <img src="../banner.jpg" alt="리브러쉬 과즙 구강스프레이 캠페인" onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+      <img src="../image/product.png" alt="리브러쉬 과즙 구강스프레이 캠페인" onload="this.parentElement.classList.add('has-img');" onerror="this.parentElement.classList.add('no-img'); this.remove();" />
       <div class="hero-overlay">
         <div class="hero-kicker">RE:BRUSH · 인플루언서 캠페인 가이드 · <span class="tier">B Type</span></div>
         <h1>리브러쉬 가이드라인</h1>
@@ -500,7 +509,7 @@
     <h2 class="sec-title">제품 소개</h2>
 
     <div class="product-thumb">
-      <img src="../image/product.png" alt="리브러쉬 과즙 구강스프레이" onerror="this.parentElement.style.display='none';" />
+      <img src="../product.png" alt="리브러쉬 과즙 구강스프레이" onerror="this.parentElement.style.display='none';" />
     </div>
 
     <div class="pick-note">
