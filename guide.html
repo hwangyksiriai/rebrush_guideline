@@ -763,6 +763,15 @@
       padding: 56px 24px;
     }
     .banner-wrap.no-img .banner-overlay { position: static; }
+    /* 배너에 실제 사진이 깔리면 제목이 사진 위에 얹힌다.
+       위에서 아래로 옅어지는 흰 스크림을 둬서 어떤 사진에서도 글씨가 읽히게 한다. */
+    .banner-wrap:not(.no-img) .banner-overlay {
+      justify-content: flex-start;
+      padding: 30px 24px 48px;
+      background: linear-gradient(to bottom,
+        rgba(255,255,255,.94) 0%, rgba(255,255,255,.86) 34%,
+        rgba(255,255,255,.28) 60%, rgba(255,255,255,0) 78%);
+    }
   </style>
 </head>
 <body>
