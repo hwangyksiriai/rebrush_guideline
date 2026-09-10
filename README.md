@@ -68,7 +68,6 @@ Re:Brush(리브러쉬) 과즙 구강스프레이 인플루언서 캠페인 페�
 
 ## 확정 후 채워야 하는 항목
 
-- **공동작업자 인스타그램 계정** — `guide.html`, `*-type/index.html`
 - **해시태그** — `guide.html` 의 `.hashtag-wrap` (현재 값은 브랜드명 기준 임시안)
 - **레퍼런스 콘텐츠** — `guide.html` 에 레퍼런스 섹션 미포함 (링크 확보 후 추가)
 - **`og:url` / `og:image`** — `guide.html` head, 배포 도메인 확정 후
