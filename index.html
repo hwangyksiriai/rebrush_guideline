@@ -1,119 +1,152 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f4f4f4" />
-  <title>리브러쉬 과즙 구강스프레이 캠페인 가이드</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>리브러쉬 과즙 구강스프레이 캠페인</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="리브러쉬 인플루언서 캠페인">
+  <meta property="og:description" content="Re:Brush × Creator Campaign — 과즙 구강스프레이 3종, 캠페인 가이드와 신청">
+  <meta name="description" content="Re:Brush × Creator Campaign — 과즙 구강스프레이 3종, 캠페인 가이드와 신청">
+  <meta property="og:locale" content="ko_KR">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
-
     :root {
-      --ink: #252525;
-      --ink2: #5c5c5c;
-      --muted: #9e9e9e;
-      --bg: #f4f4f4;
-      --surface: #ffffff;
-      --border: #e2e2e2;
-      --accent: #404040;
+      --green: #BFE0F2;
+      --green-light: #A7D3EC;
+      --green-pale: #DCEEF9;
+      --green-text: #316B8F;
+      --cream: #EFF7FC;
+      --warm-white: #E2F0FA;
+      --text-dark: #2A3B47;
+      --text-mid: #45596A;
+      --text-light: #5A7583;
+      --border: #CFE3F0;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Noto Sans KR', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      word-break: keep-all;
-      -webkit-font-smoothing: antialiased;
-      -webkit-tap-highlight-color: transparent;
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--cream); color: var(--text-dark);
+      line-height: 1.7; word-break: keep-all; overflow-wrap: break-word;
+      -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
     }
-    a, button { -webkit-tap-highlight-color: transparent; }
-    .tier-card:active { opacity: .8; }
-    .hub { max-width: 520px; margin: 0 auto; padding: 64px 24px; width: 100%; }
-    .hero-kicker {
-      font-size: 12px; font-weight: 600; letter-spacing: .12em;
-      color: var(--muted); text-transform: uppercase; margin-bottom: 20px;
+    .banner-wrap { max-width: 640px; margin: 0 auto; position: relative; }
+    .banner-wrap img { width: 100%; display: block; }
+    .banner-wrap.no-img { background: var(--green-pale); padding: 56px 24px; }
+    .banner-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      text-align: center; padding: 30px 24px 48px;
+      background: linear-gradient(to bottom,
+        rgba(255,255,255,.94) 0%, rgba(255,255,255,.86) 34%,
+        rgba(255,255,255,.28) 60%, rgba(255,255,255,0) 78%);
     }
-    h1 { font-size: clamp(26px, 6vw, 38px); font-weight: 800; letter-spacing: -.025em; line-height: 1.25; margin-bottom: 6px; }
-    .hero-en { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .04em; margin-bottom: 18px; }
-    .hero-desc { font-size: 14.5px; color: var(--ink2); line-height: 1.8; }
+    .banner-wrap.no-img .banner-overlay { position: static; background: none; padding: 0; }
+    .header-eyebrow {
+      font-size: 10px; letter-spacing: .35em; font-weight: 300;
+      color: var(--text-dark); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .header-title { font-size: 26px; font-weight: 700; line-height: 1.3; letter-spacing: -.01em; margin-bottom: 8px; }
+    .header-sub { font-size: 10px; font-weight: 300; letter-spacing: .3em; text-transform: uppercase; }
+    @media (max-width: 480px) { .header-title { font-size: 20px; } }
 
-    .tier-list { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 44px 28px 56px; }
+    .lead { font-size: 14px; color: var(--text-mid); line-height: 1.85; margin-bottom: 10px; }
+    .facts {
+      background: var(--green); border: 1px solid var(--green-light);
+      border-radius: 14px; padding: 20px 22px; margin: 22px 0 28px;
+    }
+    .fact { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; font-size: 13.5px; }
+    .fact + .fact { border-top: 1px solid rgba(42,59,71,.12); }
+    .fact .k { color: rgba(42,59,71,.62); flex-shrink: 0; }
+    .fact .v { font-weight: 700; text-align: right; }
+
+    .pick-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .18em;
+      color: var(--green-text); text-transform: uppercase; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .pick-label::before { content: ''; width: 16px; height: 1px; background: var(--green-text); }
+
+    .tier-list { display: flex; flex-direction: column; gap: 12px; }
     .tier-card {
-      display: block; background: var(--surface); border: 1px solid var(--border);
-      border-radius: 18px; padding: 24px; text-decoration: none; color: var(--ink);
-      box-shadow: 0 1px 6px rgba(0,0,0,.05);
-      transition: transform .15s, box-shadow .15s;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 20px 22px; text-decoration: none; color: var(--text-dark);
+      transition: border-color .15s, transform .15s;
     }
-    .tier-card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,0,0,.08); }
-    .tier-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .tier-name { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
-    .tier-name .fee { color: var(--ink); }
-    .tier-desc { font-size: 13px; color: var(--ink2); line-height: 1.6; }
-    .tier-arrow { margin-top: 16px; font-size: 13px; font-weight: 700; color: var(--ink); }
+    .tier-card:hover { border-color: var(--green-light); transform: translateY(-1px); }
+    .tier-card:active { opacity: .85; }
+    .tier-name { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--text-light); text-transform: uppercase; }
+    .tier-fee { font-size: 20px; font-weight: 700; margin-top: 2px; }
+    .tier-go { font-size: 13px; font-weight: 700; color: var(--green-text); flex-shrink: 0; }
 
-    .brand-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--accent); color: #fff;
-      border-radius: 999px; padding: 11px 20px;
-      font-size: 13px; font-weight: 700; text-decoration: none;
-      margin-top: 26px; transition: opacity .15s;
+    .note {
+      margin-top: 24px; font-size: 12.5px; color: var(--text-mid);
+      background: var(--warm-white); border-radius: 12px; padding: 14px 16px; line-height: 1.75;
     }
-    .brand-link:hover { opacity: .85; }
-
-    footer { margin-top: 40px; text-align: center; font-size: 12px; color: #c8c8c8; line-height: 2; }
-    footer strong { color: var(--muted); }
-
-    @media(max-width:600px) {
-      .hub { padding: 44px 20px; }
-      .tier-card { padding: 20px; }
+    .footer {
+      border-top: 1px solid var(--border); padding: 28px 24px;
+      text-align: center; font-size: 11px; color: var(--text-light); line-height: 2;
     }
+    .footer strong { color: var(--text-mid); }
   </style>
 </head>
 <body>
 
-  <div class="hub">
-    <div class="hero-kicker">RE:BRUSH · 인플루언서 캠페인 가이드</div>
-    <h1>리브러쉬 과즙 구강스프레이</h1>
-    <div class="hero-en">Re:Brush Guideline</div>
-    <p class="hero-desc">참여하실 캠페인 유형을 선택해주세요. 네 가이드 모두 콘텐츠 조건은 동일하며, 고료만 다릅니다.<br><br><strong>업로드 기간</strong> 10월 1일 ~ 10월 7일 (기간 내 1회)<br><strong>제공 제품</strong> 과즙 구강스프레이 1개 (3종 중 택 1)</p>
-
-    <div class="tier-list">
-      <a class="tier-card" href="a-type/index.html">
-        <div class="tier-eyebrow">A Type</div>
-        <div class="tier-name">A Type · <span class="fee">50,000원</span></div>
-        <div class="tier-desc">릴스 1건 · 공동작업자 필수 · 2차 활용 동의</div>
-        <div class="tier-arrow">가이드 보기 →</div>
-      </a>
-      <a class="tier-card" href="b-type/index.html">
-        <div class="tier-eyebrow">B Type</div>
-        <div class="tier-name">B Type · <span class="fee">100,000원</span></div>
-        <div class="tier-desc">릴스 1건 · 공동작업자 필수 · 2차 활용 동의</div>
-        <div class="tier-arrow">가이드 보기 →</div>
-      </a>
-      <a class="tier-card" href="c-type/index.html">
-        <div class="tier-eyebrow">C Type</div>
-        <div class="tier-name">C Type · <span class="fee">200,000원</span></div>
-        <div class="tier-desc">릴스 1건 · 공동작업자 필수 · 2차 활용 동의</div>
-        <div class="tier-arrow">가이드 보기 →</div>
-      </a>
-      <a class="tier-card" href="d-type/index.html">
-        <div class="tier-eyebrow">D Type</div>
-        <div class="tier-name">D Type · <span class="fee">500,000원</span></div>
-        <div class="tier-desc">릴스 1건 · 공동작업자 필수 · 2차 활용 동의</div>
-        <div class="tier-arrow">가이드 보기 →</div>
-      </a>
-    </div>
-
-    <a class="brand-link" href="https://rebrush.co.kr" target="_blank" rel="noopener">브랜드 바로가기 ↗</a>
-
-    <footer>
-      <strong>RE:BRUSH</strong> × SIRIAI<br>
-      ※ 본 페이지는 캠페인을 지원하고자 하는 크리에이터를 위한 모집폼입니다.
-    </footer>
+<div class="banner-wrap">
+  <img src="image/product.png" alt="리브러쉬 과즙 구강스프레이" onerror="this.style.display='none'; this.parentElement.classList.add('no-img');">
+  <div class="banner-overlay">
+    <div class="header-eyebrow">Influencer Campaign</div>
+    <div class="header-title">리브러쉬 과즙 구강스프레이</div>
+    <div class="header-sub">Re:Brush × Creator Campaign</div>
   </div>
+</div>
+
+<div class="wrap">
+  <p class="lead">
+    참여하실 캠페인 유형을 선택해주세요.<br>
+    <strong>네 유형 모두 콘텐츠 조건과 가이드 내용은 동일하며, 고료만 다릅니다.</strong>
+  </p>
+
+  <div class="facts">
+    <div class="fact"><div class="k">업로드</div><div class="v">10월 1일 ~ 10월 7일<br><span style="font-weight:400;font-size:12px;">기간 내 1회</span></div></div>
+    <div class="fact"><div class="k">형식</div><div class="v">릴스 (Reels)</div></div>
+    <div class="fact"><div class="k">제공 제품</div><div class="v">과즙 구강스프레이 1개<br><span style="font-weight:400;font-size:12px;">3종 중 택 1</span></div></div>
+    <div class="fact"><div class="k">공동작업자</div><div class="v">필수</div></div>
+  </div>
+
+  <div class="pick-label">Select Type</div>
+  <div class="tier-list">
+    <a class="tier-card" href="a-type/index.html">
+      <div><div class="tier-name">A Type</div><div class="tier-fee">50,000원</div></div>
+      <div class="tier-go">가이드 · 신청 →</div>
+    </a>
+    <a class="tier-card" href="b-type/index.html">
+      <div><div class="tier-name">B Type</div><div class="tier-fee">100,000원</div></div>
+      <div class="tier-go">가이드 · 신청 →</div>
+    </a>
+    <a class="tier-card" href="c-type/index.html">
+      <div><div class="tier-name">C Type</div><div class="tier-fee">200,000원</div></div>
+      <div class="tier-go">가이드 · 신청 →</div>
+    </a>
+    <a class="tier-card" href="d-type/index.html">
+      <div><div class="tier-name">D Type</div><div class="tier-fee">500,000원</div></div>
+      <div class="tier-go">가이드 · 신청 →</div>
+    </a>
+  </div>
+
+  <div class="note">
+    각 페이지 안에 <strong>브랜드 소개 · 캠페인 개요 · 제작 가이드 · 광고 표현 가이드라인 · 신청폼</strong>이
+    모두 들어 있습니다. 안내받으신 유형으로 들어가 주세요.
+  </div>
+</div>
+
+<div class="footer">
+  <strong>RE:BRUSH</strong> × SIRIAI<br>
+  ※ 본 페이지는 캠페인을 지원하고자 하는 크리에이터를 위한 모집폼입니다.
+</div>
 
 </body>
 </html>
