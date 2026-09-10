@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f4f4" />
+  <title>리브러쉬 과즙 구강스프레이 캠페인 가이드 · C Type</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    :root {
+      --ink: #252525;
+      --ink2: #5c5c5c;
+      --muted: #9e9e9e;
+      --light: #c8c8c8;
+      --bg: #f4f4f4;
+      --surface: #ffffff;
+      --border: #e2e2e2;
+      --accent: #404040;
+      --green: #22a35f;
+      --red: #d94040;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.75;
+      letter-spacing: -.01em;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a, button, .tier-card, .btn-addr, .btn-cta { -webkit-tap-highlight-color: transparent; }
+    .btn-cta:active, .btn-addr:active, .copybtn:active { opacity: .8; }
+
+    /* ── DEADLINE BAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      padding: 9px 20px;
+      font-size: 13px; font-weight: 600;
+      letter-spacing: .01em;
+    }
+    .topbar span { opacity: .8; font-weight: 400; margin-left: 6px; }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky; top: 38px; z-index: 190;
+      background: rgba(244,244,244,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto; white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-inner { display: inline-flex; padding: 0 24px; }
+    .nav a {
+      display: inline-block;
+      padding: 13px 14px;
+      font-size: 13px; font-weight: 500; color: var(--muted);
+      text-decoration: none; white-space: nowrap;
+      border-bottom: 1.5px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 72px 24px 48px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .hero-kicker {
+      font-size: 12px; font-weight: 600; letter-spacing: .12em;
+      color: var(--muted); text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-kicker .tier { color: var(--ink); font-weight: 800; }
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 46px);
+      font-weight: 800; line-height: 1.25;
+      letter-spacing: -.025em;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .hero-en { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: .04em; margin-bottom: 20px; }
+    .hero-desc { font-size: 14.5px; color: var(--ink2); margin-bottom: 24px; line-height: 1.8; }
+    .hero-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: #fff;
+      border-radius: 999px; padding: 11px 20px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      transition: opacity .15s;
+      margin-top: 24px;
+    }
+    .hero-link:hover { opacity: .85; }
+    .hero-img {
+      position: relative;
+      width: 100%; border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      aspect-ratio: 16/14;
+      color: var(--muted); font-size: 13px;
+      overflow: hidden;
+    }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    /* 배너 이미지가 아직 없을 때: 이미지만 걷어내고 히어로 문구는 그대로 보여준다.
+       (innerHTML 을 통째로 갈아끼우면 제목까지 같이 지워진다) */
+    .hero-img.no-img { aspect-ratio: auto; }
+    .hero-img.no-img .hero-overlay { position: static; background: none; padding: 28px 24px; }
+    .hero-overlay {
+      position: absolute; top: 0; left: 0; right: 0;
+      padding: 28px 24px 56px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.98) 0%, rgba(255,255,255,.96) 55%, rgba(255,255,255,.85) 80%, rgba(255,255,255,0) 100%);
+    }
+    .hero-overlay .hero-kicker { margin-bottom: 14px; }
+    .hero-overlay h1 { margin-bottom: 4px; }
+    .hero-overlay .hero-en { margin-bottom: 10px; }
+    .hero-overlay .hero-desc { margin-bottom: 0; }
+
+    .product-thumb {
+      width: 160px; margin: 0 auto 28px;
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    }
+    .product-thumb img { width: 100%; display: block; }
+
+    /* ── LAYOUT ── */
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 56px 0; border-top: 1px solid var(--border); }
+
+    .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: .14em;
+      color: var(--muted); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .sec-title {
+      font-size: clamp(22px, 3.5vw, 28px); font-weight: 900;
+      letter-spacing: -.02em; margin-bottom: 32px;
+    }
+    .badge-req {
+      display: inline-block; background: var(--red); color: #fff;
+      font-size: 10px; font-weight: 700; letter-spacing: .06em;
+      border-radius: 6px; padding: 3px 8px; vertical-align: middle; margin-left: 8px;
+    }
+
+    /* ── SCHEDULE & DETAILS ── */
+    .sched-card {
+      background: var(--ink); color: #fff;
+      border-radius: 18px; padding: 26px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.14);
+    }
+    .sched-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; opacity: .55; margin-bottom: 16px; }
+    .sched-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+    .sched-row:last-child { border-bottom: none; }
+    .sched-label { font-size: 13px; color: rgba(255,255,255,.6); flex-shrink: 0; }
+    .sched-value { font-size: 14.5px; font-weight: 800; text-align: right; }
+    .sched-value.big { font-size: 19px; }
+
+    .note {
+      background: #fffbeb; border: 1px solid #fcd34d;
+      border-radius: 10px; padding: 12px 16px;
+      font-size: 13px; color: #92400e;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .note strong { color: #78350f; }
+    .note.err { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+    .note.err strong { color: #7f1d1d; }
+    .note.ok { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+
+    /* ── PRODUCT FEATURE ── */
+    .feat-list { display: flex; flex-direction: column; gap: 12px; }
+    .feat {
+      display: flex; gap: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.04);
+    }
+    .feat-num {
+      flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%;
+      background: var(--bg); border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: var(--ink2);
+    }
+    .feat-title { font-size: 15.5px; font-weight: 700; margin-bottom: 5px; }
+    .feat-desc { font-size: 13px; color: var(--ink2); line-height: 1.7; }
+
+    /* ── GUIDE BLOCKS ── */
+    .guide-block { margin-bottom: 20px; }
+    .guide-head {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 800; margin-bottom: 12px;
+    }
+    .guide-head .icon { font-size: 15px; }
+    .guide-list { display: flex; flex-direction: column; gap: 8px; }
+    .guide-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 13px 16px;
+      font-size: 13.5px; color: var(--ink); line-height: 1.6;
+      box-shadow: 0 1px 4px rgba(0,0,0,.03);
+    }
+
+    /* ── ACCORDION ── */
+    .accordion { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .acc-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 1px 6px rgba(0,0,0,.04);
+    }
+    .acc-item summary {
+      list-style: none; cursor: pointer; padding: 16px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      font-size: 14.5px; font-weight: 800; color: var(--ink);
+    }
+    .acc-item summary::-webkit-details-marker { display: none; }
+    .acc-item summary .plus {
+      flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--ink2); transition: transform .2s;
+    }
+    .acc-item[open] summary .plus { transform: rotate(45deg); }
+    .acc-body { padding: 0 18px 20px; font-size: 13.5px; color: var(--ink2); line-height: 1.8; }
+    .acc-body h4 { font-size: 13px; font-weight: 800; color: var(--ink); margin: 14px 0 6px; }
+    .acc-body h4:first-child { margin-top: 0; }
+    .acc-body p { margin-bottom: 10px; }
+    .acc-body ul { padding-left: 18px; margin-bottom: 10px; }
+    .acc-body li { margin-bottom: 4px; }
+
+    .collab-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    }
+    .collab-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      color: var(--red); text-transform: uppercase; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .collab-label::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+    .collab-accounts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .collab-account {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 999px; padding: 8px 18px;
+      font-size: 14px; font-weight: 700; color: var(--ink);
+    }
+    .collab-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+
+    /* ── HASHTAG ── */
+    .copybox {
+      background: var(--surface); border: 1px dashed var(--muted);
+      border-radius: 14px; padding: 16px 60px 16px 18px;
+      font-size: 14px; color: var(--ink); position: relative;
+      line-height: 1.7;
+    }
+    .copybtn {
+      position: absolute; top: 50%; right: 14px; transform: translateY(-50%);
+      background: var(--accent); color: #fff; border: none;
+      border-radius: 8px; font-size: 11px; font-weight: 700;
+      padding: 6px 12px; cursor: pointer; transition: background .15s;
+    }
+    .copybtn.done { background: var(--green); }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .tag {
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--ink2); font-size: 13px; font-weight: 500;
+      border-radius: 999px; padding: 7px 15px;
+    }
+
+    /* ── DO / DONT ── */
+    .dd { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .dd-col { border-radius: 16px; padding: 20px; border: 1px solid var(--border); background: var(--surface); box-shadow: 0 1px 6px rgba(0,0,0,.04); }
+    .dd-head { font-weight: 800; font-size: 13.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .dd-col.forbid .dd-head { color: var(--red); }
+    .dd-col.forbid ul { list-style: none; }
+    .dd-col.forbid li { font-size: 13.5px; color: var(--ink2); line-height: 1.75; }
+
+    /* ── APPLY / SETTLEMENT ── */
+    .info-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.05);
+      margin-bottom: 14px;
+    }
+    .checklist { display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; }
+    .checklist li { list-style: none; font-size: 13.5px; color: var(--ink2); padding-left: 20px; position: relative; }
+    .checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+    .btn-cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--accent); color: #fff; text-decoration: none;
+      border-radius: 12px; padding: 16px 24px;
+      font-size: 15px; font-weight: 700; text-align: center;
+      transition: opacity .15s; border: none; width: 100%; font-family: inherit; cursor: pointer;
+    }
+    .btn-cta:hover { opacity: .88; }
+    .btn-cta:disabled { opacity: .6; cursor: not-allowed; }
+
+    .doc-row { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+    .doc-row:last-child { border-bottom: none; }
+    .doc-row .k { color: var(--muted); font-weight: 600; flex-shrink: 0; }
+    .doc-row .v { color: var(--ink); font-weight: 700; text-align: right; }
+
+    /* ── FORM ── */
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--ink); }
+    .req { color: var(--red); }
+    .field input, .field textarea {
+      width: 100%; border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; font-size: 16px; font-family: inherit; color: var(--ink);
+      background: var(--bg);
+    }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+    .field textarea { resize: vertical; }
+    .field-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 16px; }
+    .field-row .field { flex: 1; margin-bottom: 0; }
+    .btn-addr {
+      flex-shrink: 0; background: var(--accent); color: #fff; border: none;
+      border-radius: 10px; padding: 0 18px; height: 46px; font-size: 13px; font-weight: 700; cursor: pointer;
+      font-family: inherit;
+    }
+    .agree { display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; color: var(--ink2); line-height: 1.7; margin: 18px 0; cursor: pointer; }
+    .agree input { margin-top: 3px; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 24px;
+      text-align: center;
+      font-size: 12px; color: var(--light);
+      line-height: 2;
+    }
+    footer strong { color: var(--muted); }
+
+    @media(max-width:600px) {
+      .topbar { font-size: 12px; padding: 8px 16px; line-height: 1.5; }
+      .topbar span { display: block; margin-left: 0; margin-top: 2px; opacity: .8; }
+      .nav-inner { padding: 0 12px; }
+      .nav a { padding: 11px 10px; font-size: 12px; min-height: 44px; display: inline-flex; align-items: center; }
+      .hero { padding: 36px 20px 32px; }
+      .hero-kicker { font-size: 11px; letter-spacing: .08em; }
+      .wrap { padding: 0 18px; }
+      section { padding: 40px 0; }
+      .sec-title { font-size: 22px; margin-bottom: 24px; }
+      .feat { padding: 16px; gap: 12px; }
+      .copybox { padding: 14px 18px 46px; }
+      .copybtn { top: auto; bottom: 12px; left: 18px; right: auto; transform: none; }
+    }
+
+    /* ── FLAVOR CARDS (리브러쉬 3종) ── */
+    .flavor-list { display: flex; flex-direction: column; gap: 12px; }
+    .flavor {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px 20px 20px 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.04);
+      border-left: 4px solid var(--fl, var(--accent));
+    }
+    .flavor.grape  { --fl: #6b4a8f; }
+    .flavor.apple  { --fl: #4f9e52; }
+    .flavor.peach  { --fl: #dd8368; }
+    .flavor-top { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .flavor-name { font-size: 16px; font-weight: 800; }
+    .flavor-role {
+      font-size: 10.5px; font-weight: 800; letter-spacing: .1em;
+      color: #fff; background: var(--fl); border-radius: 6px; padding: 3px 9px;
+    }
+    .flavor-fn { font-size: 13px; color: var(--ink2); line-height: 1.7; margin-bottom: 12px; }
+    .flavor-copy {
+      background: var(--bg); border-radius: 10px; padding: 11px 14px;
+      font-size: 13.5px; font-weight: 700; color: var(--ink); line-height: 1.6;
+    }
+    .flavor-pos { font-size: 12.5px; color: var(--muted); line-height: 1.7; margin-top: 10px; }
+
+    /* ── SITUATION TABLE ── */
+    .sit-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.sit {
+      width: 100%; min-width: 460px; border-collapse: collapse;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; font-size: 13px;
+    }
+    table.sit th, table.sit td { padding: 13px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.65; }
+    table.sit th { background: var(--bg); font-weight: 800; font-size: 12px; color: var(--ink2); letter-spacing: .02em; }
+    table.sit tr:last-child td { border-bottom: none; }
+    table.sit td strong { font-weight: 800; }
+
+    .pick-note {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 16px 18px; font-size: 13.5px; color: var(--ink2); line-height: 1.75;
+      box-shadow: 0 1px 6px rgba(0,0,0,.04); margin-bottom: 20px;
+    }
+    .pick-note strong { color: var(--ink); }
+    .star { color: #e0a63a; font-weight: 800; }
+
+    .tbd { color: var(--muted); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- 고정 마감 알림 -->
+<div class="topbar">
+  ⏰ 업로드 마감 <span class="tbd">일정 확정 후 안내</span>
+  <span>· 지정일 업로드 필수 (사전·사후 업로드 불가)</span>
+</div>
+
+<!-- 네비게이션 -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html">← 전체 유형</a>
+    <a href="#overview">캠페인 개요</a>
+    <a href="#product">제품 소개</a>
+    <a href="#lineup">3종 컨셉</a>
+    <a href="#guide">제작 가이드</a>
+    <a href="#policy">광고 표현 가이드</a>
+    <a href="#caution">주의사항</a>
+    <a href="#apply">신청하기</a>
+    <a href="#settlement">정산 안내</a>
+  </div>
+</nav>
+
+<!-- 브랜드 소개 (히어로) -->
+<header>
+  <div class="hero">
+    <div class="hero-img">
+      <img src="../banner.jpg" alt="리브러쉬 과즙 구강스프레이 캠페인" onerror="this.parentElement.classList.add('no-img'); this.remove();" />
+      <div class="hero-overlay">
+        <div class="hero-kicker">RE:BRUSH · 인플루언서 캠페인 가이드 · <span class="tier">C Type</span></div>
+        <h1>리브러쉬 가이드라인</h1>
+        <div class="hero-en">Re:Brush Guideline</div>
+        <p class="hero-desc">
+          프리미엄 토탈 구강케어 브랜드 <strong>리브러쉬(Re:Brush)</strong>!<br>
+          물도 컵도 없이 바로 쓰는 <strong>과즙 구강스프레이 3종</strong>을 가장 먼저 경험해 보세요.
+        </p>
+      </div>
+    </div>
+    <a class="hero-link" href="https://rebrush.co.kr" target="_blank" rel="noopener">브랜드 바로가기 ↗</a>
+  </div>
+</header>
+
+<!-- 1. 캠페인 개요 -->
+<section id="overview">
+  <div class="wrap">
+    <div class="eyebrow">Campaign Info</div>
+    <h2 class="sec-title">캠페인 개요</h2>
+
+    <div class="sched-card">
+      <div class="sched-eyebrow">Schedule &amp; Details</div>
+      <div class="sched-row"><div class="sched-label">고료</div><div class="sched-value big">200,000원</div></div>
+      <div class="sched-row"><div class="sched-label">형식</div><div class="sched-value">릴스 (Reels)</div></div>
+      <div class="sched-row"><div class="sched-label">공동작업자</div><div class="sched-value">필수</div></div>
+      <div class="sched-row"><div class="sched-label">2차 활용</div><div class="sched-value">동의</div></div>
+      <div class="sched-row"><div class="sched-label">업로드 유지 기간</div><div class="sched-value">3개월</div></div>
+      <div class="sched-row"><div class="sched-label">업로드 일정</div><div class="sched-value">확정 후 안내</div></div>
+      <div class="sched-row"><div class="sched-label">제공 제품</div><div class="sched-value">과즙 구강스프레이 3종<br>(머루포도 · 청사과 · 납작복숭아)</div></div>
+    </div>
+
+    <div style="height:14px"></div>
+    <div class="note err">
+      <span>⚠️</span>
+      <div>업로드 일정은 <strong>안내된 지정일 당일</strong>로 고정입니다. 지정된 날짜 이전이나 이후 업로드는 인정되지 않으며, 일정을 미준수하실 경우 <strong>고료 지급이 제한될 수 있는 점</strong> 유의 부탁드립니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 제품 소개 -->
+<section id="product">
+  <div class="wrap">
+    <div class="eyebrow">Product</div>
+    <h2 class="sec-title">제품 소개</h2>
+
+    <div class="product-thumb">
+      <img src="../product.png" alt="리브러쉬 과즙 구강스프레이" onerror="this.parentElement.style.display='none';" />
+    </div>
+
+    <div class="pick-note">
+      <strong>리브러쉬(Re:Brush)</strong>는 프리미엄 토탈 구강케어 브랜드입니다. 국내 최초 100배 농축 가글액을 개발하여, 단순히 입냄새를 향으로 덮는 것이 아닌 구취의 원인을 직접 제거하는 <strong>‘테라퓨틱 가글(Therapeutic Mouthwash)’</strong> 시대를 열었습니다.<br><br>
+      과즙가글로 시작된 <strong>‘맛있는 구강관리’</strong> 경험을, 이번엔 언제 어디서든 물 없이 바로 쓸 수 있는 <strong>과즙 구강스프레이</strong>로 확장했습니다.
+    </div>
+
+    <div class="feat-list">
+      <div class="feat">
+        <div class="feat-num">1</div>
+        <div>
+          <div class="feat-title">진짜 과즙, 고함량 1,000ppm</div>
+          <div class="feat-desc">인공 민트향이 아닌 고함량 천연 과즙(1,000ppm) 함유.<br>맵고 독한 민트 대신 달콤한 과즙감으로 케어합니다.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">2</div>
+        <div>
+          <div class="feat-title">유산균까지 채우는 구강 밸런스</div>
+          <div class="feat-desc">포스트바이오틱스 함유로 구취 케어와 동시에<br>입속 밸런스를 함께 챙깁니다.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">3</div>
+        <div>
+          <div class="feat-title">침 pH와 유사한 중성 pH</div>
+          <div class="feat-desc">알코올 프리 · 무설탕(Sugar Zero) · 무색소.<br>입속 환경과 가장 유사한 중성 pH 구강스프레이입니다.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-num">4</div>
+        <div>
+          <div class="feat-title">물도 컵도 없이, 1초면 끝</div>
+          <div class="feat-desc">60° 와이드 미스트로 입안에 1회 분사.<br>미니 사이즈로 최대 100회 이상 사용 가능합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 3종 컨셉 -->
+<section id="lineup">
+  <div class="wrap">
+    <div class="eyebrow">Lineup</div>
+    <h2 class="sec-title">과즙 3종, 각자의 역할</h2>
+
+    <div class="pick-note">
+      “구강 관리에도 취향을 넣으세요.”<br>
+      3종은 <strong>맛만 다른 것이 아니라 역할이 다릅니다.</strong> 콘텐츠에서 제품을 소개하실 때 아래 역할과 카피를 참고해 주세요.
+    </div>
+
+    <div class="flavor-list">
+      <div class="flavor grape">
+        <div class="flavor-top">
+          <div class="flavor-name">머루포도</div>
+          <div class="flavor-role">PURE</div>
+        </div>
+        <div class="flavor-fn"><strong>강력 구취 제거 (Deodorization)</strong><br>산화아연 + 프로폴리스의 항균 시너지로 구취를 뿌리부터 관리하는 구취케어 스프레이</div>
+        <div class="flavor-copy">“사람 만나기 전, 속냄새까지 확실히 잡고 싶은 순간 👉 PURE.”</div>
+        <div class="flavor-pos">포지셔닝 · 미팅 · 데이트 직전 사용 루틴 → 자신감 프레임으로 소구</div>
+      </div>
+
+      <div class="flavor apple">
+        <div class="flavor-top">
+          <div class="flavor-name">청사과</div>
+          <div class="flavor-role">COOLING</div>
+        </div>
+        <div class="flavor-fn"><strong>극강 쿨링 (Cooling)</strong><br>유칼립투스 + 스피아민트의 강력한 쿨링감에 병풀(시카) 성분으로 진정 효과까지 더한 쿨링 스프레이</div>
+        <div class="flavor-copy">“확실하게 상쾌한 청량감이 필요할 때 👉 COOLING.”</div>
+        <div class="flavor-pos">포지셔닝 · 나른한 오후 리프레시 → 강력한 쿨링감을 감각 공감형 카피로 전환</div>
+      </div>
+
+      <div class="flavor peach">
+        <div class="flavor-top">
+          <div class="flavor-name">납작복숭아</div>
+          <div class="flavor-role">CLEAN</div>
+        </div>
+        <div class="flavor-fn"><strong>구강 청결 (Hygiene)</strong><br>비타민 B6 · C와 유산균 발효액으로 입안 환경을 깨끗하게 정화하는 데일리 청결 스프레이</div>
+        <div class="flavor-copy">“플라그 관리까지 클린하게 하고 싶은 순간 👉 CLEAN.”</div>
+        <div class="flavor-pos">포지셔닝 · 특별한 이벤트가 없는 날에도 가볍게 관리하는 데일리 루틴</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 제작 가이드 -->
+<section id="guide">
+  <div class="wrap">
+    <div class="eyebrow">Creative Guide</div>
+    <h2 class="sec-title">제작 가이드</h2>
+
+    <div class="note">
+      <span>📌</span>
+      <div>아래 <strong>3가지 소구 방향 중 1개 이상</strong>을 골라서 영상에 반영해 주세요. 영상 기획안을 사전에 공유해 주시면 보다 정확한 피드백을 드릴 수 있습니다.</div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <div class="accordion">
+      <details class="acc-item">
+        <summary>① 기능성 — 제품별 핵심 역할 <span class="plus">+</span></summary>
+        <div class="acc-body">
+          <p>“구강 관리에도 취향을 넣으세요.” 3종의 역할 차이를 콘텐츠의 중심 메시지로 삼는 방향입니다.</p>
+          <h4>머루포도 · PURE — 강력 구취 제거</h4>
+          <ul>
+            <li>산화아연 + 프로폴리스의 항균 시너지</li>
+            <li>핵심 카피 — “사람 만나기 전, 속냄새까지 확실히 잡고 싶은 순간 👉 PURE.”</li>
+          </ul>
+          <h4>청사과 · COOLING — 극강 쿨링</h4>
+          <ul>
+            <li>유칼립투스 + 스피아민트 쿨링감, 병풀(시카) 진정</li>
+            <li>핵심 카피 — “확실하게 상쾌한 청량감이 필요할 때 👉 COOLING.”</li>
+          </ul>
+          <h4>납작복숭아 · CLEAN — 구강 청결</h4>
+          <ul>
+            <li>비타민 B6 · C, 유산균 발효액</li>
+            <li>핵심 카피 — “플라그 관리까지 클린하게 하고 싶은 순간 👉 CLEAN.”</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc-item">
+        <summary>② 권장 사용 상황 (Situation) <span class="plus">+</span></summary>
+        <div class="acc-body">
+          <p>각 향이 가장 자연스럽게 녹아드는 상황과 카피 방향입니다. 영상 기획 시 참고해 주세요.</p>
+          <div class="sit-scroll">
+            <table class="sit">
+              <thead>
+                <tr><th>시간대 · 상황</th><th>제품</th><th>핵심 카피</th><th>콘텐츠 방향</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>미팅 · 데이트 직전</td>
+                  <td><strong>머루포도</strong><br>PURE</td>
+                  <td>“사람 만나기 전, PURE.”</td>
+                  <td>구취 재발 방지를 자신감 프레임으로 전환 → 미팅 · 데이트 · 면접 전 루틴으로 포지셔닝</td>
+                </tr>
+                <tr>
+                  <td>점심 후 · 나른한 오후</td>
+                  <td><strong>청사과</strong><br>COOLING</td>
+                  <td>“입안부터 기분 전환.”</td>
+                  <td>강력한 쿨링감을 감각 공감 카피로 전환 → SNS 공유 · 저장 유도에 최적화</td>
+                </tr>
+                <tr>
+                  <td>특별한 일정이 없는 매일</td>
+                  <td><strong>납작복숭아</strong><br>CLEAN</td>
+                  <td>“매일은, CLEAN.”</td>
+                  <td>가방 · 화장대 · 책상 등 일상 속에서 반복 사용하는 습관형 데일리 케어로 포지셔닝</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <details class="acc-item" open>
+        <summary>③ 맛과 향 · 사용감 소구 <span class="star">★ 가장 추천</span> <span class="plus">+</span></summary>
+        <div class="acc-body">
+          <p>향과 맛, 그리고 스프레이만의 사용 편의성을 콘텐츠 매력 포인트로 활용하는 방향입니다.</p>
+          <h4>3종의 맛 표현</h4>
+          <ul>
+            <li>진하고 달콤한 <strong>머루포도</strong></li>
+            <li>아삭하고 산뜻한 <strong>청사과</strong></li>
+            <li>부드럽고 달콤한 <strong>납작복숭아</strong></li>
+          </ul>
+          <p>“민트의 강도만 고르던 구강스프레이에서, 이제는 내가 좋아하는 과즙까지. <strong>구강관리에도 취향을 넣으세요!</strong>”</p>
+
+          <h4>콘텐츠에서 강조하는 방법</h4>
+          <ul>
+            <li><strong>취향 소구</strong> — 맵고 독한 민트 대신, 각 향의 달콤한 과즙감을 전면에</li>
+            <li><strong>즉시성 · 편의성</strong> — 물도 컵도 필요 없이 꺼내서 뿌리고 끝</li>
+            <li><strong>향수처럼 뿌리기</strong> — 미팅 · 만남 직전, 향수를 뿌리듯 한 번 톡 뿌리는 연출</li>
+          </ul>
+
+          <h4>본인만의 TPO 연출 컨셉</h4>
+          <ul>
+            <li><strong>컨셉 1 (오피스 / 일상)</strong> — 점심 식사 후 바로 회의할 때, 커피 마시고 누군가를 만날 때</li>
+            <li><strong>컨셉 2 (데이트 / 여행)</strong> — 하루 종일 붙어있는 연인과의 데이트, 맛집 탐방 여행 중</li>
+            <li><strong>컨셉 3 (외출 루틴)</strong> — 외출 준비의 마지막 필수 단계! 숨결 매너템</li>
+            <li><strong>컨셉 4 (이동 공간)</strong> — 기내 · 차 안 등 양치하기 힘든 공간에서 물 없이 맛있고 상쾌하게 리프레시</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="guide-block">
+      <div class="guide-head"><span class="icon">📎</span> 사용 방법 (영상 내 노출 권장)</div>
+      <div class="guide-list">
+        <div class="guide-item">입안에 <strong>60° 와이드 미스트로 1회 분사</strong> → 물 · 컵 없이 바로 사용</div>
+        <div class="guide-item">휴대가 간편한 미니 사이즈 · <strong>최대 100회 이상</strong> 사용 가능</div>
+      </div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <div class="collab-box">
+      <div class="collab-label">공동작업자 필수</div>
+      <div class="collab-accounts">
+        <div class="collab-account"><div class="collab-dot"></div><span class="tbd">계정 확정 후 안내</span></div>
+      </div>
+      <div style="height:14px"></div>
+      <div class="guide-head"><span class="icon">#️⃣</span> 필수 해시태그</div>
+      <div class="copybox" id="tagbox">
+        <span class="tbd">필수 해시태그는 확정 후 업데이트됩니다.</span>
+        <button class="copybtn" type="button" onclick="copyTags()">복사</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 광고 표현 가이드라인 -->
+<section id="policy">
+  <div class="wrap">
+    <div class="eyebrow">Ad Policy</div>
+    <h2 class="sec-title">광고 표현 가이드라인<span class="badge-req">필수</span></h2>
+
+    <div class="note err">
+      <span>⚠️</span>
+      <div>본 제품은 <strong>의약외품</strong>으로, 아래 내용은 의약외품 광고 가이드라인에 따른 기준입니다. 영상 기획안을 사전에 공유해 주시면 보다 정확한 피드백을 드릴 수 있습니다.</div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <div class="dd">
+      <div class="dd-col forbid">
+        <div class="dd-head">❌ 사용 불가한 표현 및 연출</div>
+        <ul class="acc-body" style="padding:0;">
+          <li><strong>치과 질병명 언급</strong><br>치은염 · 치주염 등 특정 질환명 언급 금지. 해당 질병이 제품만으로 완치될 수 있다는 묘사 금지<br>예) ❌ “치은염 예방” / “치주염에 효과”</li>
+          <li style="margin-top:14px;"><strong>근거 없는 효능 입증</strong><br>객관적 근거 없이 ‘임상시험 완료’, ‘효능 입증’ 등 표현으로 제품 우수성 주장 금지<br>예) ❌ “임상시험 완료” / “의학적으로 입증된”</li>
+          <li style="margin-top:14px;"><strong>전문가 추천 · 보증 연출</strong><br>의사 · 치과의사 · 한의사 · 약사 등이 제품을 추천 · 지도 · 사용한다는 내용 광고 금지. 유튜브 · SNS · 블로그 등 모든 인터넷 채널에 동일 적용<br>예) ❌ “치과의사가 추천한”</li>
+          <li style="margin-top:14px;"><strong>최상급 표현</strong><br>‘최고’ ‘최상’ ‘최대’ ‘최소’ ‘제일’ 등 최상급 표현 금지. 자사 제품이 경쟁사보다 우월하다는 배타적 표현 금지<br>예) ❌ “국내 최고의 구강스프레이” / “타 제품보다 월등히 뛰어난”</li>
+          <li style="margin-top:14px;"><strong>타사 비교 · 비방</strong><br>객관적 근거 없이 타사 제품의 단점을 부각하거나 비방하여 자사 우월함을 암시하는 광고 금지<br>예) ❌ “다른 스프레이는 향으로 덮기만 하지만…”</li>
+          <li style="margin-top:14px;"><strong>성분 효능 과장</strong><br>원재료 · 성분 효능을 사실과 다르게 부풀리거나, 소비자가 일반 의약품(치료제)으로 오인하게 하는 표현 금지<br>예) ❌ “OO 성분이 치주염을 완치” / “치료 효과 입증”</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="height:20px"></div>
+
+    <div class="guide-block">
+      <div class="guide-head"><span class="icon">⚠️</span> 핵심 3원칙</div>
+      <div class="guide-list">
+        <div class="guide-item">① <strong>치과 질병명</strong> 언급 금지</div>
+        <div class="guide-item">② <strong>전문가 추천</strong> 연출 금지</div>
+        <div class="guide-item">③ 근거 없는 <strong>‘효능 입증’ 표현</strong> 금지</div>
+      </div>
+      <div style="height:10px"></div>
+      <div class="note">
+        <span>✅</span>
+        <div>이것만 확실히 지켜도 광고 규정의 큰 위반 사항은 피할 수 있습니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 주의사항 -->
+<section id="caution">
+  <div class="wrap">
+    <div class="eyebrow">Guidelines</div>
+    <h2 class="sec-title">주의사항</h2>
+
+    <div class="note">
+      <span>⚠️</span>
+      <div>업로드 기한을 반드시 준수해주세요. 공동작업자 설정 및 콘텐츠 2차 활용에 동의하는 것으로 간주됩니다.</div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="note err">
+      <span>⚠️</span>
+      <div>업로드 전 <strong>광고 표현 가이드라인</strong>을 다시 한번 확인해 주세요. 의약외품 광고 규정 위반 시 <strong>콘텐츠 수정 요청</strong>이 있을 수 있습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. 캠페인 신청하기 -->
+<section id="apply">
+  <div class="wrap">
+    <div class="eyebrow">Apply</div>
+    <h2 class="sec-title">캠페인 신청하기</h2>
+
+    <div class="info-card">
+      <form id="applyForm" target="apply_iframe" method="POST" action="https://script.google.com/macros/s/AKfycbxYzMEo5DjA5_o9ICDfyW-8DcovZFhypASk9qlWxC_yinxc2qZRcIu4lHKHK8ZIc-FO8g/exec">
+        <input type="hidden" name="campaign" value="리브러쉬 과즙 구강스프레이">
+        <input type="hidden" name="tier" value="C Type">
+        <input type="hidden" name="fee" value="200,000원">
+
+        <div class="field">
+          <label>이름 <span class="req">*</span></label>
+          <input type="text" name="name" required autocomplete="name" placeholder="홍길동">
+        </div>
+        <div class="field">
+          <label>인스타그램 링크 <span class="req">*</span></label>
+          <input type="text" name="instagram" required placeholder="instagram.com/username">
+        </div>
+        <div class="field">
+          <label>휴대폰 <span class="req">*</span></label>
+          <input type="tel" name="phone" id="phone" required autocomplete="tel" placeholder="010-0000-0000" maxlength="13" pattern="01[0-9]-[0-9]{3,4}-[0-9]{4}">
+        </div>
+        <div class="field">
+          <label>이메일 (선택)</label>
+          <input type="email" name="email" autocomplete="email" placeholder="name@email.com">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>우편번호 <span class="req">*</span></label>
+            <input type="text" name="zipcode" id="zipcode" required readonly placeholder="00000">
+          </div>
+          <button type="button" class="btn-addr" onclick="searchAddr()">주소 검색</button>
+        </div>
+        <div class="field">
+          <label>배송지 주소 <span class="req">*</span></label>
+          <input type="text" name="address" id="address" required readonly placeholder="도로명 주소">
+        </div>
+        <div class="field">
+          <label>상세 주소 <span class="req">*</span></label>
+          <input type="text" name="addressDetail" id="addressDetail" required autocomplete="address-line2" placeholder="동·호수 등">
+        </div>
+        <div class="field">
+          <label>요청사항 (선택)</label>
+          <textarea name="request" rows="3" placeholder="배송 관련 요청사항을 적어주세요"></textarea>
+        </div>
+
+        <div class="note err">
+          <span>⚠️</span>
+          <div>배송지는 매 캠페인마다 새로 확인합니다. 오배송 방지를 위해 입력값을 다시 한번 체크해주세요.</div>
+        </div>
+
+        <div style="height:12px"></div>
+        <div class="note">
+          <span>🚀</span>
+          <div>
+            <strong>업로드 · 정산 안내</strong><br>
+            안내된 업로드 마감일까지 업로드 시 정산이 진행됩니다.<br>
+            정산은 매월 5일 일괄 지급됩니다.
+          </div>
+        </div>
+
+        <label class="agree">
+          <input type="checkbox" required>
+          <span>안내된 캠페인별 가이드라인 및 고료 조건을 확인했으며 이에 동의합니다. 제작된 콘텐츠는 브랜드 및 SIRIAI의 2차 활용에 동의합니다. <strong style="color:var(--ink2)">(필수)</strong></span>
+        </label>
+
+        <button type="submit" class="btn-cta" id="submitBtn">캠페인 신청하기 →</button>
+      </form>
+
+      <div id="applySuccess" class="note ok" style="display:none;">
+        <span>✅</span>
+        <div>신청이 완료되었습니다. 확인 후 안내드리겠습니다.</div>
+      </div>
+
+      <iframe name="apply_iframe" style="display:none"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- 8. 정산 안내 -->
+<section id="settlement">
+  <div class="wrap">
+    <div class="eyebrow">Settlement</div>
+    <h2 class="sec-title">정산 안내</h2>
+
+    <div class="info-card">
+      <p style="font-size:13.5px; color:var(--ink2); margin-bottom:20px; line-height:1.75;">
+        캠페인 선정 완료 후 정산을 위한 서류 및 연락처를 누락 없이 제출해 주세요. 확인 후 <strong style="color:var(--ink)">다음 달 5일</strong>에 지급됩니다.
+      </p>
+
+      <div class="doc-row"><div class="k">제출 필수 서류</div><div class="v">성함, 연락처,<br>신분증 사본(뒷자리 포함), 통장 사본</div></div>
+      <div class="doc-row"><div class="k">수신 이메일</div><div class="v">hwangyksiriai@gmail.com</div></div>
+      <div class="doc-row"><div class="k">메일 제목</div><div class="v">리브러쉬_이름_@인스타핸들</div></div>
+
+      <div style="height:16px"></div>
+      <div class="note err">
+        <span>⚠️</span>
+        <div>확정 안내 받은 분에 한하여 전달 부탁드립니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>RE:BRUSH</strong> × SIRIAI<br>
+  ※ 본 페이지는 캠페인을 지원하고자 하는 크리에이터를 위한 모집폼입니다.
+</footer>
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+  function syncNavTop() {
+    const h = document.querySelector('.topbar').offsetHeight;
+    document.querySelector('.nav').style.top = h + 'px';
+  }
+  syncNavTop();
+  window.addEventListener('resize', syncNavTop);
+
+  function copyTags() {
+    const box = document.getElementById('tagbox');
+    const btn = box.querySelector('.copybtn');
+    const text = box.innerText.replace(btn.innerText, '').trim();
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = '복사됨';
+      btn.classList.add('done');
+      setTimeout(function () { btn.textContent = '복사'; btn.classList.remove('done'); }, 1600);
+    });
+  }
+
+  function searchAddr() {
+    new daum.Postcode({
+      oncomplete: function(data) {
+        document.getElementById('zipcode').value = data.zonecode;
+        document.getElementById('address').value = data.roadAddress || data.jibunAddress;
+        document.getElementById('addressDetail').focus();
+      }
+    }).open();
+  }
+
+  const phoneInput = document.getElementById('phone');
+  phoneInput.addEventListener('input', function () {
+    // 자동완성으로 "+82 10-0000-0000" 형태가 들어와도 010 형태로 정규화
+    let digits = phoneInput.value.replace(/[^0-9]/g, '').replace(/^0*82(?=\d)/, '0').slice(0, 11);
+    let formatted = digits;
+    if (digits.length > 3 && digits.length <= 7) {
+      formatted = digits.slice(0, 3) + '-' + digits.slice(3);
+    } else if (digits.length > 7) {
+      formatted = digits.slice(0, 3) + '-' + digits.slice(3, 7) + '-' + digits.slice(7);
+    }
+    phoneInput.value = formatted;
+  });
+
+  let submitted = false;
+  const applyForm = document.getElementById('applyForm');
+  const submitBtn = document.getElementById('submitBtn');
+  // 우편번호·주소 칸은 readonly라서 브라우저 필수값 검사(constraint validation)에서 제외된다.
+  // required 를 붙여도 '주소 검색'을 건너뛴 채 신청이 통과되므로 직접 확인한다.
+  function isAddressFilled() {
+    const zip = applyForm.elements['zipcode'];
+    const addr = applyForm.elements['address'];
+    if (zip.value.trim() && addr.value.trim()) return true;
+    alert('주소 검색 버튼을 눌러 배송지 주소를 입력해주세요.');
+    zip.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  }
+
+  applyForm.addEventListener('submit', function (e) {
+    if (!isAddressFilled()) { e.preventDefault(); return; }
+    submitted = true;
+    submitBtn.textContent = '제출 중...';
+    submitBtn.disabled = true;
+  });
+  document.querySelector('iframe[name="apply_iframe"]').addEventListener('load', function () {
+    if (!submitted) return;
+    applyForm.style.display = 'none';
+    document.getElementById('applySuccess').style.display = 'flex';
+  });
+</script>
+</body>
+</html>
