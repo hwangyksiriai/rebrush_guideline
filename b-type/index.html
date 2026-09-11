@@ -861,6 +861,43 @@
       .form-box { padding: 18px; }
       .pick-echo { font-size: 12.5px; }
     }
+
+    /* ── 모바일 최적화 ──
+       한글은 줄 끝에 한두 글자만 남는 고아줄이 잘 생긴다. text-wrap: pretty 로
+       마지막 줄을 채우고, 제목류는 balance 로 줄 길이를 고르게 맞춘다.
+       (text-wrap 은 상속되므로 body 에 걸고 제목만 덮어쓴다) */
+    body { text-wrap: pretty; }
+    .header-title, .section-title, .product-name, .collab-brand-title,
+    .concept-name, .flavor-detail-name, .concept-steps > li > div > strong,
+    .rec-title, .key-msg-badge, .hashtag-label, .ban-title {
+      text-wrap: balance;
+    }
+
+    /* 손가락으로 누르는 영역 확보 */
+    .pick-echo a { display: inline-flex; align-items: center; min-height: 40px; }
+    .agree input { width: 17px; height: 17px; accent-color: var(--green-text); margin-top: 1px; }
+
+    @media (max-width: 480px) {
+      /* 좁은 화면에서 자간을 살짝 조여 한 줄에 더 담는다 */
+      body { letter-spacing: -0.012em; }
+      /* 한글은 줄간격이 좁으면 읽기 힘들어 12~13px 본문을 조금 넓힌다 */
+      .quote-chip, .sub-list li, .rec-item, .ban-desc { line-height: 1.68; }
+      .concept-summary { padding: 14px 15px; }
+      .concept-body { padding: 0 15px 18px; }
+      .ban-item { padding: 12px 13px; }
+      .field input, .field textarea { padding: 11px 12px; font-size: 16px; }
+      .btn-addr { padding: 0 14px; }
+      .agree { font-size: 12px; line-height: 1.75; }
+    }
+    @media (max-width: 380px) {
+      .section { padding: 32px 16px; }
+      .form-box { padding: 16px; }
+      .flavor-emoji { font-size: 18px; margin-bottom: 4px; }
+      .flavor-btn-name { font-size: 11.5px; }
+      .flavor-btn-role { font-size: 9px; letter-spacing: .06em; }
+      .info-key { font-size: 10.5px; min-width: 56px; }
+      .collab-brand img { width: 80px; }
+    }
   </style>
 </head>
 <body>
@@ -921,7 +958,7 @@
     </div>
     <div class="info-row">
       <div class="info-key">업로드</div>
-      <div class="info-val">10월 1일 ~ 10월 7일<br><span style="font-size:11px;color:rgba(42,59,71,0.5)">기간 내 1회 업로드 · ⚠️ 일정 미준수 시 고료 지급 불가</span></div>
+      <div class="info-val">10월 6일까지<br><span style="font-size:11px;color:rgba(42,59,71,0.5)">⚠️ 일정 미준수 시 고료 지급 불가</span></div>
     </div>
     <div class="info-row">
       <div class="info-key">형식</div>
@@ -1207,7 +1244,7 @@
 
   <div class="warning-box">
     ⚠️ <strong>업로드 기한을 반드시 준수해주세요.</strong><br>
-    <strong>10월 1일 ~ 10월 7일</strong> 기간 내 업로드가 이루어지지 않을 경우 고료 지급이 불가합니다.<br><br>
+    <strong>10월 6일까지</strong> 업로드가 이루어지지 않을 경우 고료 지급이 불가합니다.<br><br>
     공동작업자 설정 및 콘텐츠 2차 활용에 동의하는 것으로 간주됩니다.
   </div>
 </div>
