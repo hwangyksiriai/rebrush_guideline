@@ -36,6 +36,12 @@
 
     html { -webkit-text-size-adjust: 100%; }
 
+    /* 어떤 환경에서도 페이지가 화면보다 넓어져 좌우가 잘리지 않게 하는 안전장치.
+       clip 은 스크롤 컨테이너를 만들지 않아 hidden 보다 부작용이 적고,
+       지원하지 않는 구형 브라우저는 앞 줄(hidden)로 떨어진다. */
+    html, body { max-width: 100%; overflow-x: hidden; overflow-x: clip; }
+    img { max-width: 100%; }
+
     body {
       font-family: 'Noto Sans KR', sans-serif;
       background-color: var(--cream);

@@ -25,6 +25,10 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
+
+    /* 어떤 환경에서도 페이지가 화면보다 넓어져 좌우가 잘리지 않게 하는 안전장치 */
+    html, body { max-width: 100%; overflow-x: hidden; overflow-x: clip; }
+    img { max-width: 100%; }
     body {
       font-family: 'Noto Sans KR', sans-serif;
       background: var(--cream); color: var(--text-dark);
