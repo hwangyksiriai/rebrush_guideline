@@ -433,13 +433,23 @@
       padding: 22px 24px;
       margin-bottom: 20px;
     }
+    /* 하늘색 박스 위에서 회색 레이블처럼 묻히지 않도록 붉은 계열로 올린다 */
     .key-msg-title {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: rgba(42,59,71,0.55);
-      font-weight: 700;
-      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+      color: #9E2F24;
+      font-weight: 800;
       margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .key-msg-title::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: #C6564A; flex-shrink: 0;
+    }
+    .key-msg-title .required {
+      background: #C6564A; color: #fff; border: none;
+      font-size: 10px; font-weight: 700; letter-spacing: .04em;
+      padding: 3px 8px; border-radius: 10px;
     }
     .key-msg-item {
       padding: 12px 0;
@@ -741,14 +751,13 @@
     table.sit td strong { color: var(--text-dark); font-weight: 700; }
 
     /* ── 광고 금지 표현 ── */
-    .ban-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
-    .ban-item {
-      background: #fff; border: 1px solid var(--border);
-      border-left: 3px solid #C6564A; border-radius: 10px; padding: 12px 14px;
-    }
-    .ban-title { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
-    .ban-desc { font-size: 12.5px; color: var(--text-mid); line-height: 1.65; }
-    .ban-ex { font-size: 12px; color: #A94438; margin-top: 5px; }
+    .ban-list { margin-top: 4px; }
+    .concept.ban { border-left: 3px solid #C6564A; }
+    .concept.ban .concept-num { background: #FBEAE7; color: #B03A2E; }
+    .concept.ban[open] .concept-num { background: #C6564A; color: #fff; border: 1px solid #C6564A; }
+    .concept.ban[open] .concept-chevron { color: #C6564A; }
+    .ban-desc { font-size: 12.5px; color: var(--text-mid); line-height: 1.65; margin-top: 14px; }
+    .ban-ex { font-size: 12px; color: #A94438; margin-top: 6px; }
 
     @media (max-width: 480px) {
       .flavor-pick { gap: 6px; }
@@ -863,7 +872,7 @@
     body { text-wrap: pretty; }
     .header-title, .section-title, .product-name, .collab-brand-title,
     .concept-name, .flavor-detail-name, .concept-steps > li > div > strong,
-    .rec-title, .key-msg-badge, .hashtag-label, .ban-title {
+    .rec-title, .key-msg-badge, .hashtag-label {
       text-wrap: balance;
     }
 
@@ -877,7 +886,6 @@
       .quote-chip, .sub-list li, .rec-item, .ban-desc { line-height: 1.68; }
       .concept-summary { padding: 14px 15px; }
       .concept-body { padding: 0 15px 18px; }
-      .ban-item { padding: 12px 13px; }
       .field input, .field textarea { padding: 11px 12px; font-size: 16px; }
       .btn-addr { padding: 0 14px; }
       .agree { font-size: 12px; line-height: 1.75; }
@@ -1060,7 +1068,7 @@
         <div class="concept-list">
           <details class="concept" open>
             <summary class="concept-summary">
-              <span class="concept-num">3</span>
+              <span class="concept-num">1</span>
               <span class="concept-name">맛과 향 · 사용감 소구 <span class="concept-pick">가장 추천</span></span>
               <span class="concept-chevron">⌄</span>
             </summary>
@@ -1089,7 +1097,7 @@
 
           <details class="concept">
             <summary class="concept-summary">
-              <span class="concept-num">1</span>
+              <span class="concept-num">2</span>
               <span class="concept-name">기능성 — 제품별 핵심 역할</span>
               <span class="concept-chevron">⌄</span>
             </summary>
@@ -1129,7 +1137,7 @@
 
           <details class="concept">
             <summary class="concept-summary">
-              <span class="concept-num">2</span>
+              <span class="concept-num">3</span>
               <span class="concept-name">권장 사용 상황 (Situation)</span>
               <span class="concept-chevron">⌄</span>
             </summary>
@@ -1180,7 +1188,7 @@
   <div class="divider"></div>
 
   <div class="key-msg-box">
-    <div class="key-msg-title">영상에 꼭 넣어주세요</div>
+    <div class="key-msg-title">영상에 꼭 넣어주세요 <span class="required">필수</span></div>
     <div class="key-msg-item">
       <div class="key-msg-badge">CUT 1 · 분사 장면</div>
       <div class="key-msg-text">입안에 <strong>60° 와이드 미스트로 1회 분사</strong>하는 장면을 클로즈업으로 담아주세요.</div>
@@ -1249,36 +1257,74 @@
   <div class="ref-note">본 제품은 <strong>의약외품</strong>입니다. 아래는 의약외품 광고 가이드라인에 따른 기준으로, 위반 시 콘텐츠 수정 요청이 있을 수 있습니다.</div>
 
   <div style="font-size:12px;font-weight:700;color:var(--text-mid);margin:20px 0 10px;">❌ 사용 불가한 표현 및 연출</div>
-  <div class="ban-list">
-    <div class="ban-item">
-      <div class="ban-title">치과 질병명 언급</div>
-      <div class="ban-desc">치은염 · 치주염 등 특정 질환명 언급 금지. 해당 질병이 제품만으로 완치될 수 있다는 묘사 금지</div>
-      <div class="ban-ex">예) ❌ “치은염 예방” / “치주염에 효과”</div>
-    </div>
-    <div class="ban-item">
-      <div class="ban-title">근거 없는 효능 입증</div>
-      <div class="ban-desc">객관적 근거 없이 ‘임상시험 완료’, ‘효능 입증’ 등 표현으로 제품 우수성 주장 금지</div>
-      <div class="ban-ex">예) ❌ “임상시험 완료” / “의학적으로 입증된”</div>
-    </div>
-    <div class="ban-item">
-      <div class="ban-title">전문가 추천 · 보증 연출</div>
-      <div class="ban-desc">의사 · 치과의사 · 한의사 · 약사 등이 제품을 추천 · 지도 · 사용한다는 내용 광고 금지. 유튜브 · SNS · 블로그 등 모든 인터넷 채널에 동일 적용</div>
-      <div class="ban-ex">예) ❌ “치과의사가 추천한”</div>
-    </div>
-    <div class="ban-item">
-      <div class="ban-title">최상급 표현</div>
-      <div class="ban-desc">‘최고’ ‘최상’ ‘최대’ ‘최소’ ‘제일’ 등 최상급 표현 금지. 자사 제품이 경쟁사보다 우월하다는 배타적 표현 금지</div>
-      <div class="ban-ex">예) ❌ “국내 최고의 구강스프레이” / “타 제품보다 월등히 뛰어난”</div>
-    </div>
-    <div class="ban-item">
-      <div class="ban-title">타사 비교 · 비방</div>
-      <div class="ban-desc">객관적 근거 없이 타사 제품의 단점을 부각하거나 비방하여 자사 우월함을 암시하는 광고 금지</div>
-      <div class="ban-ex">예) ❌ “다른 스프레이는 향으로 덮기만 하지만…”</div>
-    </div>
-    <div class="ban-item">
-      <div class="ban-title">성분 효능 과장</div>
-      <div class="ban-desc">원재료 · 성분 효능을 사실과 다르게 부풀리거나, 소비자가 일반 의약품(치료제)으로 오인하게 하는 표현 금지</div>
-      <div class="ban-ex">예) ❌ “OO 성분이 치주염을 완치” / “치료 효과 입증”</div>
+  <div class="concept-list ban-list">
+    <details class="concept ban">
+      <summary class="concept-summary">
+        <span class="concept-num">1</span>
+        <span class="concept-name">치과 질병명 언급</span>
+        <span class="concept-chevron">⌄</span>
+      </summary>
+      <div class="concept-body">
+        <div class="ban-desc">치은염 · 치주염 등 특정 질환명 언급 금지. 해당 질병이 제품만으로 완치될 수 있다는 묘사 금지</div>
+        <div class="ban-ex">예) ❌ “치은염 예방” / “치주염에 효과”</div>
+      </div>
+    </details>
+    <details class="concept ban">
+      <summary class="concept-summary">
+        <span class="concept-num">2</span>
+        <span class="concept-name">근거 없는 효능 입증</span>
+        <span class="concept-chevron">⌄</span>
+      </summary>
+      <div class="concept-body">
+        <div class="ban-desc">객관적 근거 없이 ‘임상시험 완료’, ‘효능 입증’ 등 표현으로 제품 우수성 주장 금지</div>
+        <div class="ban-ex">예) ❌ “임상시험 완료” / “의학적으로 입증된”</div>
+      </div>
+    </details>
+    <details class="concept ban">
+      <summary class="concept-summary">
+        <span class="concept-num">3</span>
+        <span class="concept-name">전문가 추천 · 보증 연출</span>
+        <span class="concept-chevron">⌄</span>
+      </summary>
+      <div class="concept-body">
+        <div class="ban-desc">의사 · 치과의사 · 한의사 · 약사 등이 제품을 추천 · 지도 · 사용한다는 내용 광고 금지. 유튜브 · SNS · 블로그 등 모든 인터넷 채널에 동일 적용</div>
+        <div class="ban-ex">예) ❌ “치과의사가 추천한”</div>
+      </div>
+    </details>
+    <details class="concept ban">
+      <summary class="concept-summary">
+        <span class="concept-num">4</span>
+        <span class="concept-name">최상급 표현</span>
+        <span class="concept-chevron">⌄</span>
+      </summary>
+      <div class="concept-body">
+        <div class="ban-desc">‘최고’ ‘최상’ ‘최대’ ‘최소’ ‘제일’ 등 최상급 표현 금지. 자사 제품이 경쟁사보다 우월하다는 배타적 표현 금지</div>
+        <div class="ban-ex">예) ❌ “국내 최고의 구강스프레이” / “타 제품보다 월등히 뛰어난”</div>
+      </div>
+    </details>
+    <details class="concept ban">
+      <summary class="concept-summary">
+        <span class="concept-num">5</span>
+        <span class="concept-name">타사 비교 · 비방</span>
+        <span class="concept-chevron">⌄</span>
+      </summary>
+      <div class="concept-body">
+        <div class="ban-desc">객관적 근거 없이 타사 제품의 단점을 부각하거나 비방하여 자사 우월함을 암시하는 광고 금지</div>
+        <div class="ban-ex">예) ❌ “다른 스프레이는 향으로 덮기만 하지만…”</div>
+      </div>
+    </details>
+    <details class="concept ban">
+      <summary class="concept-summary">
+        <span class="concept-num">6</span>
+        <span class="concept-name">성분 효능 과장</span>
+        <span class="concept-chevron">⌄</span>
+      </summary>
+      <div class="concept-body">
+        <div class="ban-desc">원재료 · 성분 효능을 사실과 다르게 부풀리거나, 소비자가 일반 의약품(치료제)으로 오인하게 하는 표현 금지</div>
+        <div class="ban-ex">예) ❌ “OO 성분이 치주염을 완치” / “치료 효과 입증”</div>
+      </div>
+    </details>
+  </div>
     </div>
   </div>
 
