@@ -108,6 +108,41 @@
     }
     .footer strong { color: var(--text-mid); }
 
+    /* ── 비밀번호 게이트 ──
+       클라이언트 쪽 확인이라 소스를 보면 값이 드러난다. 외부 유입을 한 번
+       걸러주는 용도이지 보안 수단은 아니다. */
+    #site { display: none; }
+    #site.unlocked { display: block; }
+    .gate {
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .gate[hidden] { display: none; }
+    .gate-box { width: 100%; max-width: 280px; text-align: center; }
+    .gate-kicker {
+      font-size: 10px; font-weight: 700; letter-spacing: .3em;
+      color: var(--green-text); text-transform: uppercase; margin-bottom: 22px;
+    }
+    .gate-box input {
+      width: 100%; border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; font-size: 16px; text-align: center; letter-spacing: .35em;
+      font-family: inherit; color: var(--text-dark); background: #fff;
+      margin-bottom: 10px;
+    }
+    .gate-box input:focus { outline: none; border-color: var(--green-text); }
+    .gate-box button {
+      width: 100%; background: var(--text-dark); color: #fff; border: none;
+      border-radius: 10px; padding: 14px; font-size: 14px; font-weight: 700;
+      font-family: inherit; cursor: pointer;
+    }
+    .gate-box button:active { opacity: .88; }
+    .gate-err {
+      color: #9E2F24; font-size: 12px; margin-top: 12px; visibility: hidden;
+    }
+    .gate-err.show { visibility: visible; }
+
     /* ── 모바일 최적화 ── */
     body { text-wrap: pretty; }
     .header-title, .tier-fee, .lead strong { text-wrap: balance; }
@@ -129,6 +164,17 @@
   </style>
 </head>
 <body>
+
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="gate-kicker">Re:Brush · Private</div>
+    <input type="password" id="gate-pw" inputmode="numeric" placeholder="비밀번호" autocomplete="off" maxlength="10">
+    <button id="gate-btn" type="button">확인</button>
+    <div class="gate-err" id="gate-err">비밀번호가 올바르지 않습니다.</div>
+  </div>
+</div>
+
+<div id="site">
 
 <div class="banner-wrap">
   <img src="image/product.png" alt="리브러쉬 과즙 구강스프레이" onerror="this.style.display='none'; this.parentElement.classList.add('no-img');">
@@ -190,6 +236,40 @@
   <strong>RE:BRUSH</strong> × SIRIAI<br>
   ※ 본 페이지는 캠페인을 지원하고자 하는 크리에이터를 위한 모집폼입니다.
 </div>
+
+</div><!-- /#site -->
+
+<script>
+  (function () {
+    var PW = '0907';
+    var KEY = 'rebrush-gate';
+    var gate = document.getElementById('gate');
+    var site = document.getElementById('site');
+    var input = document.getElementById('gate-pw');
+    var err = document.getElementById('gate-err');
+
+    function unlock() {
+      gate.hidden = true;
+      site.classList.add('unlocked');
+    }
+    // 한 번 통과하면 같은 탭에서는 다시 묻지 않는다
+    try { if (sessionStorage.getItem(KEY) === 'ok') unlock(); } catch (e) {}
+
+    function check() {
+      if (input.value.trim() === PW) {
+        try { sessionStorage.setItem(KEY, 'ok'); } catch (e) {}
+        unlock();
+      } else {
+        err.classList.add('show');
+        input.value = '';
+        input.focus();
+      }
+    }
+    document.getElementById('gate-btn').addEventListener('click', check);
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    input.addEventListener('input', function () { err.classList.remove('show'); });
+  })();
+</script>
 
 </body>
 </html>
