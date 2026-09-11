@@ -1365,7 +1365,7 @@
       </div>
       <div class="field">
         <label>휴대폰 <span class="req">*</span></label>
-        <input type="tel" name="phone" id="phone" required autocomplete="tel" placeholder="010-0000-0000" maxlength="13" pattern="01[0-9]-[0-9]{3,4}-[0-9]{4}">
+        <input type="tel" name="phone" id="phone" required autocomplete="tel" placeholder="010-0000-0000" maxlength="20" pattern="01[0-9]-[0-9]{3,4}-[0-9]{4}">
       </div>
       <div class="field">
         <label>이메일 (선택)</label>
@@ -1552,7 +1552,9 @@
 
   const phoneInput = document.getElementById('phone');
   phoneInput.addEventListener('input', function () {
-    // 자동완성으로 "+82 10-0000-0000" 형태가 들어와도 010 형태로 정규화
+    // 자동완성으로 "+82 10-0000-0000" 형태가 들어와도 010 형태로 정규화.
+    // maxlength 는 정규화 전 원본 길이에 걸리므로 국가번호까지 담기게 넉넉히 둔다
+    // (13 이면 "+82 10-3456-7890" 이 잘려 "010-3456-7" 이 되고 제출이 막힌다).
     let d = phoneInput.value.replace(/[^0-9]/g, '').replace(/^0*82(?=\d)/, '0').slice(0, 11);
     let out = d;
     if (d.length > 3 && d.length <= 7) out = d.slice(0, 3) + '-' + d.slice(3);
