@@ -73,7 +73,9 @@ Re:Brush(리브러쉬) 과즙 구강스프레이 인플루언서 캠페인 페�
 
 - **레퍼런스 콘텐츠** — 아직 확보 전이라 섹션을 넣지 않았습니다.
   링크가 생기면 정산 안내 앞에 `section-label: Reference` 섹션으로 추가하면 됩니다.
-- **`og:url` / `og:image`** — 각 페이지 head, 배포 도메인 확정 후
+배포 주소: https://rebrush-guideline-2fo8.vercel.app
+`og:url` / `og:image` 는 이 주소 기준으로 채워져 있습니다. **도메인이 바뀌면
+7개 파일(허브 + 6타입)의 `rebrush-guideline-2fo8.vercel.app` 을 모두 교체해야 합니다.**
 
 ## 로컬 미리보기
 
