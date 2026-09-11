@@ -115,6 +115,40 @@ function doPost(e) {
   }
 }
 
+/**
+ * 편집기에서 바로 돌려보는 자가진단.
+ *
+ * 상단 함수 목록에서 testSave 를 고르고 [▶ 실행] 을 누르세요.
+ * 웹페이지·배포와 무관하게 '스크립트가 이 시트에 쓸 수 있는지'만 확인합니다.
+ *
+ *   시트에 TEST 행이 생김  -> 스크립트와 시트는 정상.
+ *                            문제는 배포(웹 앱/버전) 아니면 웹페이지 쪽입니다.
+ *   실행 로그에 빨간 오류  -> 그 메시지가 원인입니다. 그대로 알려주세요.
+ *
+ * 확인한 뒤 시트에서 TEST 행은 지우시면 됩니다.
+ */
+function testSave() {
+  var res = doPost({
+    parameter: {
+      campaign: '리브러쉬 과즙 구강스프레이',
+      tier: 'TEST',
+      fee: '0원',
+      flavor: '\uD83C\uDF4F 청사과 (COOLING)',
+      name: '편집기테스트',
+      instagram: '@test',
+      phone: '01000000000',
+      email: 'test@test.com',
+      zipcode: '03900',
+      address: '서울 마포구 가양대로 1',
+      addressDetail: '101호',
+      request: '편집기에서 실행한 테스트'
+    }
+  });
+  Logger.log('결과: ' + res.getContent());
+  Logger.log('시트: ' + getSheet_().getName() + ' / 데이터 ' +
+             Math.max(0, getSheet_().getLastRow() - 1) + '행');
+}
+
 // 배포가 살아 있는지 브라우저로 확인할 때 쓰는 용도.
 // 웹 앱 URL 을 주소창에 그대로 열면 시트에 실제로 닿는지까지 보여준다.
 //   ok / 시트1 / 데이터 N행   -> 정상
