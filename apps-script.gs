@@ -7,11 +7,13 @@
  * ─────────────────────────────────────────────────────────────
  * 설정 방법
  *
- * 1. 위 시트를 열고 [확장 프로그램] > [Apps Script] 를 클릭합니다.
+ * 1. Apps Script 편집기를 엽니다. 시트의 [확장 프로그램] > [Apps Script] 로 열어도 되고,
+ *    script.google.com 에서 만든 독립 프로젝트여도 됩니다.
+ *    (위 SPREADSHEET_ID 로 시트를 직접 열기 때문에 어느 쪽이든 동작합니다.)
  * 2. 기본 코드(myFunction)를 전부 지우고 이 파일 내용을 통째로 붙여넣습니다.
  * 3. 저장(디스크 아이콘)합니다.
  * 4. 우측 상단 [배포] > [새 배포] 를 클릭합니다.
- *    - 유형 선택(톱니바퀴) : 웹 앱
+ *    - 유형 선택(톱니바퀴) : 웹 앱   ← '라이브러리' 를 고르면 신청이 들어오지 않습니다
  *    - 설명               : 아무거나 (예: 리브러쉬 신청폼)
  *    - 실행 계정          : 나
  *    - 액세스 권한        : 모든 사용자   ← 반드시 이걸로. '나만'이면 신청이 안 들어옵니다
@@ -25,6 +27,12 @@
  *    를 해야 반영됩니다. 이때 URL 은 그대로 유지됩니다.
  * ─────────────────────────────────────────────────────────────
  */
+
+// 응답을 쌓을 스프레드시트 ID.
+// getActiveSpreadsheet() 를 쓰면 '시트에 붙은 스크립트'일 때만 동작하고,
+// script.google.com 에서 새로 만든 독립 스크립트에서는 null 이 되어 저장이 실패한다.
+// ID 로 직접 열면 스크립트가 어디에 있든 같은 시트에 쌓인다.
+var SPREADSHEET_ID = '1dJGNZ9LAzlC_kldI8DzJv8z1TuWgmMBKwJ9XMJMDtw8';
 
 // 응답을 쌓을 탭 이름
 var TARGET_SHEET_NAME = '시트1';
@@ -59,7 +67,8 @@ function normalizeInstagram(v) {
 }
 
 // 탭을 찾고, 비어 있으면 헤더를 먼저 깔아둔다.
-function getSheet_(ss) {
+function getSheet_() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   var sheet = ss.getSheetByName(TARGET_SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(TARGET_SHEET_NAME);
   if (sheet.getLastRow() === 0) {
@@ -74,8 +83,7 @@ function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = getSheet_(ss);
+    var sheet = getSheet_();
     var p = e.parameter;
     var fullAddress = [p.address, p.addressDetail].filter(function (v) { return v; }).join(' ');
 
@@ -108,7 +116,16 @@ function doPost(e) {
 }
 
 // 배포가 살아 있는지 브라우저로 확인할 때 쓰는 용도.
-// 웹 앱 URL 을 주소창에 그대로 열었을 때 'ok' 가 보이면 정상입니다.
+// 웹 앱 URL 을 주소창에 그대로 열면 시트에 실제로 닿는지까지 보여준다.
+//   ok / 시트1 / 데이터 N행   -> 정상
+//   error: ...                -> 시트를 못 여는 상태 (ID 나 권한 확인)
 function doGet() {
-  return ContentService.createTextOutput('ok');
+  try {
+    var sheet = getSheet_();
+    var rows = Math.max(0, sheet.getLastRow() - 1);
+    return ContentService.createTextOutput(
+      'ok / ' + sheet.getName() + ' / 데이터 ' + rows + '행');
+  } catch (err) {
+    return ContentService.createTextOutput('error: ' + err.message);
+  }
 }
