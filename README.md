@@ -13,7 +13,7 @@ Re:Brush(리브러쉬) 과즙 구강스프레이 인플루언서 캠페인 페�
 | `c-type/index.html` | C Type · 150,000원 |
 | `d-type/index.html` | D Type · 200,000원 |
 | `e-type/index.html` | E Type · 300,000원 |
-| `f-type/index.html` | F Type · 고료 조정 |
+| `f-type/index.html` | F Type · 고료 조정 (페이지에는 고료를 표시하지 않음) |
 | `apps-script.gs` | 신청폼 → 구글 시트 저장용 Apps Script |
 | `vercel.json` | `cleanUrls` — `/a-type` 처럼 확장자 없이 열림 |
 
