@@ -116,6 +116,46 @@ function doPost(e) {
 }
 
 /**
+ * 고료 타입 6종을 한 번에 저장해 보는 테스트. ★ 이걸 실행하세요.
+ *
+ * 상단 함수 목록에서 testAllTiers 를 고르고 [▶ 실행].
+ * 실제 저장 경로(doPost)를 그대로 지나므로, 신청폼으로 들어올 때와 같은 값이 쌓입니다.
+ *
+ *   시트에 TEST 6행이 생김 -> 스크립트와 시트는 정상.
+ *                            신청이 안 들어온다면 원인은 배포나 웹페이지 쪽입니다.
+ *   빨간 오류가 뜸         -> 그 메시지가 원인입니다. 그대로 알려주세요.
+ *
+ * 확인 후 TEST 행 6개는 지우시면 됩니다.
+ */
+function testAllTiers() {
+  var cases = [
+    ['A Type', '50,000원',  '🍇 머루포도 (PURE)'],
+    ['B Type', '100,000원', '🍏 청사과 (COOLING)'],
+    ['C Type', '150,000원', '🍑 납작복숭아 (CLEAN)'],
+    ['D Type', '200,000원', '🍇 머루포도 (PURE)'],
+    ['E Type', '300,000원', '🍏 청사과 (COOLING)'],
+    ['F Type', '고료 조정',  '🍑 납작복숭아 (CLEAN)']
+  ];
+  cases.forEach(function (c, i) {
+    doPost({ parameter: {
+      campaign: '리브러쉬 과즙 구강스프레이',
+      tier: c[0],
+      fee: c[1],
+      flavor: c[2],
+      name: 'TEST ' + c[0],
+      instagram: '@test' + (i + 1),
+      phone: '0100000000' + (i + 1),
+      email: 'test' + (i + 1) + '@test.com',
+      zipcode: '03900',
+      address: '서울 마포구 가양대로 1',
+      addressDetail: (101 + i) + '호',
+      request: '고료별 테스트'
+    }});
+  });
+  Logger.log('6종 저장 완료 / 데이터 ' + Math.max(0, getSheet_().getLastRow() - 1) + '행');
+}
+
+/**
  * 편집기에서 바로 돌려보는 자가진단.
  *
  * 상단 함수 목록에서 testSave 를 고르고 [▶ 실행] 을 누르세요.
