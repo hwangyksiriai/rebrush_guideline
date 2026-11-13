@@ -7,7 +7,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rebrush-guideline-2fo8.vercel.app/">
   <meta property="og:title" content="리브러쉬 인플루언서 캠페인">
-  <meta property="og:description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈 · 10월 과즙 구강스프레이">
+  <meta property="og:description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈">
   <meta property="og:image" content="https://rebrush-guideline-2fo8.vercel.app/image/product.png">
   <meta property="og:image:secure_url" content="https://rebrush-guideline-2fo8.vercel.app/image/product.png">
   <meta property="og:image:type" content="image/png">
@@ -15,11 +15,11 @@
   <meta property="og:image:height" content="385">
   <meta property="og:image:alt" content="리브러쉬 과즙 구강스프레이 3종">
   <meta property="og:locale" content="ko_KR">
-  <meta name="description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈 · 10월 과즙 구강스프레이">
+  <meta name="description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="리브러쉬 인플루언서 캠페인">
-  <meta name="twitter:description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈 · 10월 과즙 구강스프레이">
+  <meta name="twitter:description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈">
   <meta name="twitter:image" content="https://rebrush-guideline-2fo8.vercel.app/image/product.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -111,8 +111,9 @@
       padding: 14px; text-decoration: none; color: var(--text-dark);
       transition: border-color .15s, transform .15s;
     }
-    .dec-card:hover { border-color: #B9A2E0; transform: translateY(-1px); }
-    .dec-card:active { opacity: .85; }
+    .dec-tiers .tier-card { border-color: #DCCEF0; }
+    .dec-tiers .tier-card:hover { border-color: #B9A2E0; }
+    .dec-tiers .tier-go { color: #6A4A9C; }
     .dec-card img { width: 96px; height: 96px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
     .dec-card-body { min-width: 0; }
     .dec-card .tier-name { color: #6A4A9C; }
@@ -123,6 +124,37 @@
       .dec-card { gap: 12px; padding: 12px; }
       .dec-card img { width: 76px; height: 76px; }
       .dec-card-title { font-size: 14.5px; }
+    }
+
+    /* 마감된 캠페인 폴더 */
+    .folder {
+      margin-top: 36px; background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+    }
+    .folder-sum {
+      list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px;
+      padding: 16px 18px; min-height: 52px; -webkit-tap-highlight-color: transparent;
+    }
+    .folder-sum::-webkit-details-marker { display: none; }
+    .folder-icon { font-size: 17px; flex-shrink: 0; }
+    .folder-title { font-size: 15px; font-weight: 700; color: var(--text-mid); min-width: 0; }
+    .closed-badge {
+      flex-shrink: 0; font-size: 10.5px; font-weight: 700; color: #fff;
+      background: #8A96A0; border-radius: 6px; padding: 2px 8px;
+    }
+    .folder-chev { margin-left: auto; font-size: 12px; color: var(--text-light); transition: transform .2s; flex-shrink: 0; }
+    .folder[open] .folder-chev { transform: rotate(180deg); }
+    .folder-body { padding: 4px 18px 20px; border-top: 1px solid var(--border); background: var(--cream); }
+    .folder-body .lead { margin-top: 14px; }
+    /* 마감 캠페인은 흐리게 */
+    .folder .facts { background: #E6EDF2; border-color: #D3DEE6; }
+    .folder .tier-card { opacity: .72; }
+    .folder .tier-card:hover { opacity: 1; }
+    .folder .tier-go { color: var(--text-light); }
+    @media (max-width: 380px) {
+      .folder-sum { padding: 14px; gap: 8px; }
+      .folder-body { padding: 4px 14px 18px; }
+      .folder-title { font-size: 14px; }
     }
 
     .note {
@@ -222,23 +254,54 @@
     <span class="camp-month">12월</span>
     <span class="camp-name">상큼두배 포도듀오 · 올영 어워즈</span>
   </div>
-  <a class="dec-card" href="december/index.html">
+  <div class="dec-card">
     <img src="image/grape-duo.jpg" alt="리브러쉬 포도듀오" onerror="this.style.display='none';">
     <div class="dec-card-body">
       <div class="tier-name">December · New</div>
       <div class="dec-card-title">포도 과즙가글 어워즈 기획세트</div>
       <div class="dec-card-meta">11월 29일(일) 업로드 · 올영세일 가격 안내</div>
-      <div class="tier-go" style="margin-top:8px;">가이드 보기 →</div>
     </div>
-  </a>
-
-  <!-- 10월 캠페인 -->
-  <div class="camp-head" style="margin-top:40px;">
-    <span class="camp-month">10월</span>
-    <span class="camp-name">과즙 구강스프레이</span>
   </div>
+
+  <!-- 12월 고료별 타입. E Type(고료 조정)은 페이지에 고료 줄이 없다 -->
+  <div class="pick-label" style="margin-top:20px;">Select Type</div>
+  <div class="tier-list dec-tiers">
+    <a class="tier-card" href="december/a-type/index.html">
+      <div><div class="tier-name">A Type</div><div class="tier-fee">200,000원</div></div>
+      <div class="tier-go">가이드 보기 →</div>
+    </a>
+    <a class="tier-card" href="december/b-type/index.html">
+      <div><div class="tier-name">B Type</div><div class="tier-fee">400,000원</div></div>
+      <div class="tier-go">가이드 보기 →</div>
+    </a>
+    <a class="tier-card" href="december/c-type/index.html">
+      <div><div class="tier-name">C Type</div><div class="tier-fee">500,000원</div></div>
+      <div class="tier-go">가이드 보기 →</div>
+    </a>
+    <a class="tier-card" href="december/d-type/index.html">
+      <div><div class="tier-name">D Type</div><div class="tier-fee">1,000,000원</div></div>
+      <div class="tier-go">가이드 보기 →</div>
+    </a>
+    <a class="tier-card" href="december/e-type/index.html">
+      <div><div class="tier-name">E Type</div><div class="tier-fee">고료 조정</div></div>
+      <div class="tier-go">가이드 보기 →</div>
+    </a>
+  </div>
+  <div class="note" style="margin-top:14px;">
+    다섯 유형 모두 가이드 내용은 동일하며, <strong>고료만 다릅니다.</strong>
+  </div>
+
+  <!-- 9월 캠페인 (마감) — 접힌 폴더. 페이지 주소(/a-type 등)는 그대로 둔다 -->
+  <details class="folder">
+    <summary class="folder-sum">
+      <span class="folder-icon">📁</span>
+      <span class="folder-title">9월 · 과즙 구강스프레이</span>
+      <span class="closed-badge">마감</span>
+      <span class="folder-chev">⌄</span>
+    </summary>
+    <div class="folder-body">
   <p class="lead" style="font-size:12.5px;">
-    여섯 유형 모두 콘텐츠 조건과 가이드 내용은 동일하며, 고료만 다릅니다.
+    모집이 마감된 캠페인입니다. 참여하신 분은 가이드 확인용으로만 열어주세요.
   </p>
 
   <div class="facts" style="margin-top:14px;">
@@ -252,34 +315,35 @@
   <div class="tier-list">
     <a class="tier-card" href="a-type/index.html">
       <div><div class="tier-name">A Type</div><div class="tier-fee">50,000원</div></div>
-      <div class="tier-go">가이드 · 신청 →</div>
+      <div class="tier-go">마감 · 가이드 보기 →</div>
     </a>
     <a class="tier-card" href="b-type/index.html">
       <div><div class="tier-name">B Type</div><div class="tier-fee">100,000원</div></div>
-      <div class="tier-go">가이드 · 신청 →</div>
+      <div class="tier-go">마감 · 가이드 보기 →</div>
     </a>
     <a class="tier-card" href="c-type/index.html">
       <div><div class="tier-name">C Type</div><div class="tier-fee">150,000원</div></div>
-      <div class="tier-go">가이드 · 신청 →</div>
+      <div class="tier-go">마감 · 가이드 보기 →</div>
     </a>
     <a class="tier-card" href="d-type/index.html">
       <div><div class="tier-name">D Type</div><div class="tier-fee">200,000원</div></div>
-      <div class="tier-go">가이드 · 신청 →</div>
+      <div class="tier-go">마감 · 가이드 보기 →</div>
     </a>
     <a class="tier-card" href="e-type/index.html">
       <div><div class="tier-name">E Type</div><div class="tier-fee">300,000원</div></div>
-      <div class="tier-go">가이드 · 신청 →</div>
+      <div class="tier-go">마감 · 가이드 보기 →</div>
     </a>
     <a class="tier-card" href="f-type/index.html">
       <div><div class="tier-name">F Type</div><div class="tier-fee">고료 조정</div></div>
-      <div class="tier-go">가이드 · 신청 →</div>
+      <div class="tier-go">마감 · 가이드 보기 →</div>
     </a>
   </div>
 
   <div class="note">
-    각 페이지 안에 <strong>브랜드 소개 · 캠페인 개요 · 제작 가이드 · 광고 표현 가이드라인 · 신청폼</strong>이
-    모두 들어 있습니다. 안내받으신 유형으로 들어가 주세요.
+    여섯 유형 모두 콘텐츠 조건과 가이드 내용은 동일하며, 고료만 다릅니다.
   </div>
+    </div>
+  </details>
 </div>
 
 <div class="footer">
