@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>리브러쉬 과즙 구강스프레이 캠페인</title>
+  <title>리브러쉬 인플루언서 캠페인</title>
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://rebrush-guideline-2fo8.vercel.app/">
-  <meta property="og:title" content="리브러쉬 과즙 구강스프레이 캠페인">
-  <meta property="og:description" content="Re:Brush × Creator Campaign — 10월 6일까지 업로드 · 과즙 구강스프레이 3종 중 택 1">
+  <meta property="og:title" content="리브러쉬 인플루언서 캠페인">
+  <meta property="og:description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈 · 10월 과즙 구강스프레이">
   <meta property="og:image" content="https://rebrush-guideline-2fo8.vercel.app/image/product.png">
   <meta property="og:image:secure_url" content="https://rebrush-guideline-2fo8.vercel.app/image/product.png">
   <meta property="og:image:type" content="image/png">
@@ -15,11 +15,11 @@
   <meta property="og:image:height" content="385">
   <meta property="og:image:alt" content="리브러쉬 과즙 구강스프레이 3종">
   <meta property="og:locale" content="ko_KR">
-  <meta name="description" content="Re:Brush × Creator Campaign — 10월 6일까지 업로드 · 과즙 구강스프레이 3종 중 택 1">
+  <meta name="description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈 · 10월 과즙 구강스프레이">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="리브러쉬 과즙 구강스프레이 캠페인">
-  <meta name="twitter:description" content="Re:Brush × Creator Campaign — 10월 6일까지 업로드 · 과즙 구강스프레이 3종 중 택 1">
+  <meta name="twitter:title" content="리브러쉬 인플루언서 캠페인">
+  <meta name="twitter:description" content="Re:Brush × Creator Campaign — 12월 포도듀오 올영 어워즈 · 10월 과즙 구강스프레이">
   <meta name="twitter:image" content="https://rebrush-guideline-2fo8.vercel.app/image/product.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -97,6 +97,33 @@
     .tier-name { font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--text-light); text-transform: uppercase; }
     .tier-fee { font-size: 20px; font-weight: 700; margin-top: 2px; }
     .tier-go { font-size: 13px; font-weight: 700; color: var(--green-text); flex-shrink: 0; }
+
+    /* 월별 캠페인 묶음 */
+    .camp-head { display: flex; align-items: center; gap: 10px; margin: 26px 0 12px; }
+    .camp-month {
+      font-size: 11px; font-weight: 700; color: #fff; background: var(--text-dark);
+      border-radius: 6px; padding: 3px 9px; flex-shrink: 0;
+    }
+    .camp-name { font-size: 16px; font-weight: 700; }
+    .dec-card {
+      display: flex; align-items: center; gap: 16px;
+      background: #F8F5FC; border: 1px solid #DCCEF0; border-radius: 14px;
+      padding: 14px; text-decoration: none; color: var(--text-dark);
+      transition: border-color .15s, transform .15s;
+    }
+    .dec-card:hover { border-color: #B9A2E0; transform: translateY(-1px); }
+    .dec-card:active { opacity: .85; }
+    .dec-card img { width: 96px; height: 96px; object-fit: cover; border-radius: 10px; flex-shrink: 0; }
+    .dec-card-body { min-width: 0; }
+    .dec-card .tier-name { color: #6A4A9C; }
+    .dec-card .tier-go { color: #6A4A9C; }
+    .dec-card-title { font-size: 16px; font-weight: 700; line-height: 1.4; margin-top: 2px; }
+    .dec-card-meta { font-size: 12px; color: var(--text-mid); margin-top: 3px; line-height: 1.5; }
+    @media (max-width: 380px) {
+      .dec-card { gap: 12px; padding: 12px; }
+      .dec-card img { width: 76px; height: 76px; }
+      .dec-card-title { font-size: 14.5px; }
+    }
 
     .note {
       margin-top: 24px; font-size: 12.5px; color: var(--text-mid);
@@ -180,18 +207,41 @@
   <img src="image/product.png" alt="리브러쉬 과즙 구강스프레이" onerror="this.style.display='none'; this.parentElement.classList.add('no-img');">
   <div class="banner-overlay">
     <div class="header-eyebrow">Influencer Campaign</div>
-    <div class="header-title">리브러쉬 과즙 구강스프레이</div>
+    <div class="header-title">리브러쉬 인플루언서 캠페인</div>
     <div class="header-sub">Re:Brush × Creator Campaign</div>
   </div>
 </div>
 
 <div class="wrap">
   <p class="lead">
-    참여하실 캠페인 유형을 선택해주세요.<br>
-    <strong>여섯 유형 모두 콘텐츠 조건과 가이드 내용은 동일하며, 고료만 다릅니다.</strong>
+    참여하실 캠페인을 선택해주세요.
   </p>
 
-  <div class="facts">
+  <!-- 12월 캠페인 -->
+  <div class="camp-head">
+    <span class="camp-month">12월</span>
+    <span class="camp-name">상큼두배 포도듀오 · 올영 어워즈</span>
+  </div>
+  <a class="dec-card" href="december/index.html">
+    <img src="image/grape-duo.jpg" alt="리브러쉬 포도듀오" onerror="this.style.display='none';">
+    <div class="dec-card-body">
+      <div class="tier-name">December · New</div>
+      <div class="dec-card-title">포도 과즙가글 어워즈 기획세트</div>
+      <div class="dec-card-meta">11월 29일(일) 업로드 · 올영세일 가격 안내</div>
+      <div class="tier-go" style="margin-top:8px;">가이드 보기 →</div>
+    </div>
+  </a>
+
+  <!-- 10월 캠페인 -->
+  <div class="camp-head" style="margin-top:40px;">
+    <span class="camp-month">10월</span>
+    <span class="camp-name">과즙 구강스프레이</span>
+  </div>
+  <p class="lead" style="font-size:12.5px;">
+    여섯 유형 모두 콘텐츠 조건과 가이드 내용은 동일하며, 고료만 다릅니다.
+  </p>
+
+  <div class="facts" style="margin-top:14px;">
     <div class="fact"><div class="k">업로드</div><div class="v">10월 6일까지</div></div>
     <div class="fact"><div class="k">형식</div><div class="v">릴스 (Reels)</div></div>
     <div class="fact"><div class="k">제공 제품</div><div class="v">과즙 구강스프레이 1개<br><span style="font-weight:400;font-size:12px;">3종 중 택 1</span></div></div>
